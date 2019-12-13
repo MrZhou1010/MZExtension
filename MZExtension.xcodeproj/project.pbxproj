@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B409C80E23A35FE400EC80F8 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B409C80D23A35FE400EC80F8 /* UIFont+Extension.swift */; };
+		B409C81523A3689800EC80F8 /* UITextView+PlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = B409C81123A3689800EC80F8 /* UITextView+PlaceHolder.m */; };
+		B409C81623A3689800EC80F8 /* UITextView+LimitCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = B409C81323A3689800EC80F8 /* UITextView+LimitCounter.m */; };
+		B409C81923A36D2500EC80F8 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B409C81823A36D2500EC80F8 /* UIImage+Extension.swift */; };
+		B409C81B23A383A400EC80F8 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B409C81A23A383A400EC80F8 /* String+Extension.swift */; };
+		B409C81D23A385B600EC80F8 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B409C81C23A385B600EC80F8 /* NSObject+Extension.swift */; };
+		B409C81F23A3868D00EC80F8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B409C81E23A3868D00EC80F8 /* UIView+Extension.swift */; };
+		B409C82223A3905900EC80F8 /* UIButton+MZImageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B409C82023A3905900EC80F8 /* UIButton+MZImageTitle.swift */; };
+		B409C82323A3905900EC80F8 /* UIImageView+MZGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = B409C82123A3905900EC80F8 /* UIImageView+MZGif.swift */; };
 		B4DC895923A2322500C75FC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC895823A2322500C75FC2 /* AppDelegate.swift */; };
 		B4DC895B23A2322500C75FC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC895A23A2322500C75FC2 /* SceneDelegate.swift */; };
 		B4DC895D23A2322500C75FC2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC895C23A2322500C75FC2 /* ViewController.swift */; };
@@ -37,6 +46,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B409C80D23A35FE400EC80F8 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		B409C81023A3689700EC80F8 /* MZExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MZExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		B409C81123A3689800EC80F8 /* UITextView+PlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+PlaceHolder.m"; sourceTree = "<group>"; };
+		B409C81223A3689800EC80F8 /* UITextView+PlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+PlaceHolder.h"; sourceTree = "<group>"; };
+		B409C81323A3689800EC80F8 /* UITextView+LimitCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+LimitCounter.m"; sourceTree = "<group>"; };
+		B409C81423A3689800EC80F8 /* UITextView+LimitCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+LimitCounter.h"; sourceTree = "<group>"; };
+		B409C81823A36D2500EC80F8 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		B409C81A23A383A400EC80F8 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		B409C81C23A385B600EC80F8 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		B409C81E23A3868D00EC80F8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		B409C82023A3905900EC80F8 /* UIButton+MZImageTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+MZImageTitle.swift"; sourceTree = "<group>"; };
+		B409C82123A3905900EC80F8 /* UIImageView+MZGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+MZGif.swift"; sourceTree = "<group>"; };
 		B4DC895523A2322500C75FC2 /* MZExtension.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZExtension.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4DC895823A2322500C75FC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4DC895A23A2322500C75FC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +101,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B409C80F23A3683D00EC80F8 /* UITextView */ = {
+			isa = PBXGroup;
+			children = (
+				B409C81423A3689800EC80F8 /* UITextView+LimitCounter.h */,
+				B409C81323A3689800EC80F8 /* UITextView+LimitCounter.m */,
+				B409C81223A3689800EC80F8 /* UITextView+PlaceHolder.h */,
+				B409C81123A3689800EC80F8 /* UITextView+PlaceHolder.m */,
+			);
+			path = UITextView;
+			sourceTree = "<group>";
+		};
+		B409C81723A36CF200EC80F8 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				B409C81823A36D2500EC80F8 /* UIImage+Extension.swift */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
 		B4DC894C23A2322400C75FC2 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +148,7 @@
 				B4DC895823A2322500C75FC2 /* AppDelegate.swift */,
 				B4DC895A23A2322500C75FC2 /* SceneDelegate.swift */,
 				B4DC895C23A2322500C75FC2 /* ViewController.swift */,
+				B409C81023A3689700EC80F8 /* MZExtension-Bridging-Header.h */,
 				B4DC895E23A2322500C75FC2 /* Main.storyboard */,
 				B4DC896123A2323500C75FC2 /* Assets.xcassets */,
 				B4DC896323A2323500C75FC2 /* LaunchScreen.storyboard */,
@@ -137,6 +178,7 @@
 		B4DC898823A2378100C75FC2 /* MZExtensions-swift */ = {
 			isa = PBXGroup;
 			children = (
+				B409C81723A36CF200EC80F8 /* UIImage */,
 				B4DC899323A247A400C75FC2 /* UIFont */,
 				B4DC899023A240C300C75FC2 /* CGFloat */,
 				B4DC898C23A237FA00C75FC2 /* UIView */,
@@ -158,6 +200,7 @@
 		B4DC898A23A237A500C75FC2 /* String */ = {
 			isa = PBXGroup;
 			children = (
+				B409C81A23A383A400EC80F8 /* String+Extension.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -165,6 +208,7 @@
 		B4DC898B23A237CF00C75FC2 /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
+				B409C81C23A385B600EC80F8 /* NSObject+Extension.swift */,
 			);
 			path = NSObject;
 			sourceTree = "<group>";
@@ -172,6 +216,9 @@
 		B4DC898C23A237FA00C75FC2 /* UIView */ = {
 			isa = PBXGroup;
 			children = (
+				B409C82023A3905900EC80F8 /* UIButton+MZImageTitle.swift */,
+				B409C82123A3905900EC80F8 /* UIImageView+MZGif.swift */,
+				B409C81E23A3868D00EC80F8 /* UIView+Extension.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -187,6 +234,7 @@
 		B4DC899323A247A400C75FC2 /* UIFont */ = {
 			isa = PBXGroup;
 			children = (
+				B409C80D23A35FE400EC80F8 /* UIFont+Extension.swift */,
 			);
 			path = UIFont;
 			sourceTree = "<group>";
@@ -194,6 +242,7 @@
 		B4DC899423A247DC00C75FC2 /* MZExtensions-oc */ = {
 			isa = PBXGroup;
 			children = (
+				B409C80F23A3683D00EC80F8 /* UITextView */,
 			);
 			path = "MZExtensions-oc";
 			sourceTree = "<group>";
@@ -266,6 +315,7 @@
 				TargetAttributes = {
 					B4DC895423A2322500C75FC2 = {
 						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
 					};
 					B4DC896A23A2323500C75FC2 = {
 						CreatedOnToolsVersion = 11.2.1;
@@ -329,11 +379,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B409C82223A3905900EC80F8 /* UIButton+MZImageTitle.swift in Sources */,
+				B409C80E23A35FE400EC80F8 /* UIFont+Extension.swift in Sources */,
 				B4DC895D23A2322500C75FC2 /* ViewController.swift in Sources */,
 				B4DC898F23A2388000C75FC2 /* UIColor+HexColor.swift in Sources */,
+				B409C81923A36D2500EC80F8 /* UIImage+Extension.swift in Sources */,
+				B409C81D23A385B600EC80F8 /* NSObject+Extension.swift in Sources */,
 				B4DC895923A2322500C75FC2 /* AppDelegate.swift in Sources */,
+				B409C81F23A3868D00EC80F8 /* UIView+Extension.swift in Sources */,
+				B409C81623A3689800EC80F8 /* UITextView+LimitCounter.m in Sources */,
 				B4DC895B23A2322500C75FC2 /* SceneDelegate.swift in Sources */,
+				B409C82323A3905900EC80F8 /* UIImageView+MZGif.swift in Sources */,
 				B4DC899223A2428400C75FC2 /* CGFloat+Extension.swift in Sources */,
+				B409C81B23A383A400EC80F8 /* String+Extension.swift in Sources */,
+				B409C81523A3689800EC80F8 /* UITextView+PlaceHolder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +565,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MZExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -514,6 +574,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mz.extension.MZExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MZExtension/MZExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -523,6 +585,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MZExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -531,6 +594,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mz.extension.MZExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MZExtension/MZExtension-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
