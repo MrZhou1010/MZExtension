@@ -29,7 +29,7 @@ static const void *mz_placeHolderKey;
                                    class_getInstanceMethod(self.class, @selector(mzPlaceHolder_swizzled_setText:)));
 }
 
-#pragma mark -- swizzled
+#pragma mark - swizzled
 - (void)mzPlaceHolder_swizzled_dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self mzPlaceHolder_swizzled_dealloc];

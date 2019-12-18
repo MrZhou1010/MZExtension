@@ -134,8 +134,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)hmacSHA512StringWithKey:(NSString *)key;
 
-#pragma mark - 文件散列函数
-
 /**
  *  计算文件的MD5散列结果
  *
