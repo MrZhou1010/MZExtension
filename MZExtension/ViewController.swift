@@ -14,8 +14,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let tempStr = "aa test " as NSString
-        print(tempStr.isEmpty())
+        var tempStr = "123456" as NSString
+        let enResult = tempStr.aesEncrypt(withKey: "88888888", type: .type128)
+        tempStr = "205a33ee54e15937d3cc1ca010b468ee"
+        let deResult = tempStr.aesDecrypt(withKey: "88888888", type: .type128)
+        print(enResult)
+        print(deResult)
     }
 }
 
