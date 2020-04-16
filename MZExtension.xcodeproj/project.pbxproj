@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5AA4AAF823A7B1AD00E850D8 /* NSString+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA4AAF723A7B1AD00E850D8 /* NSString+Hash.m */; };
+		B4048D6024470F16003FF984 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4048D5F24470F16003FF984 /* UITableView+Extension.swift */; };
+		B4048D62244711F1003FF984 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4048D61244711F1003FF984 /* UICollectionView+Extension.swift */; };
 		B409C80E23A35FE400EC80F8 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B409C80D23A35FE400EC80F8 /* UIFont+Extension.swift */; };
 		B409C81523A3689800EC80F8 /* UITextView+PlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = B409C81123A3689800EC80F8 /* UITextView+PlaceHolder.m */; };
 		B409C81623A3689800EC80F8 /* UITextView+LimitCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = B409C81323A3689800EC80F8 /* UITextView+LimitCounter.m */; };
@@ -51,6 +53,8 @@
 /* Begin PBXFileReference section */
 		5AA4AAF623A7B1AD00E850D8 /* NSString+Hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Hash.h"; sourceTree = "<group>"; };
 		5AA4AAF723A7B1AD00E850D8 /* NSString+Hash.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hash.m"; sourceTree = "<group>"; };
+		B4048D5F24470F16003FF984 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		B4048D61244711F1003FF984 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		B409C80D23A35FE400EC80F8 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		B409C81023A3689700EC80F8 /* MZExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MZExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		B409C81123A3689800EC80F8 /* UITextView+PlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+PlaceHolder.m"; sourceTree = "<group>"; };
@@ -241,6 +245,8 @@
 				B409C82023A3905900EC80F8 /* UIButton+MZImageTitle.swift */,
 				B409C82123A3905900EC80F8 /* UIImageView+MZGif.swift */,
 				B409C81E23A3868D00EC80F8 /* UIView+Extension.swift */,
+				B4048D5F24470F16003FF984 /* UITableView+Extension.swift */,
+				B4048D61244711F1003FF984 /* UICollectionView+Extension.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -413,12 +419,14 @@
 				B409C81623A3689800EC80F8 /* UITextView+LimitCounter.m in Sources */,
 				B4DC895B23A2322500C75FC2 /* SceneDelegate.swift in Sources */,
 				B4A3809123AA227E0047D178 /* NSString+RegExp.m in Sources */,
+				B4048D6024470F16003FF984 /* UITableView+Extension.swift in Sources */,
 				B409C82323A3905900EC80F8 /* UIImageView+MZGif.swift in Sources */,
 				B4DC899223A2428400C75FC2 /* CGFloat+Extension.swift in Sources */,
 				B471E46223BDDCC900B6C801 /* NSString+AES256.m in Sources */,
 				B409C81B23A383A400EC80F8 /* String+Extension.swift in Sources */,
 				5AA4AAF823A7B1AD00E850D8 /* NSString+Hash.m in Sources */,
 				B409C81523A3689800EC80F8 /* UITextView+PlaceHolder.m in Sources */,
+				B4048D62244711F1003FF984 /* UICollectionView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

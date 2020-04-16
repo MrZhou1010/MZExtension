@@ -54,4 +54,15 @@ extension UIColor {
         let rgb: Int = (Int)(r * 255) << 16 | (Int)(g * 255) << 8 | (Int)(b * 255) << 0
         return String(format:"#%06x", rgb)
     }
+    
+    /// create a dynamic color(light: a color in light mode,dark: a color in dark mode)
+    public convenience init(light: UIColor, dark: UIColor) {
+        if #available(iOS 13.0, *) {
+            self.init {
+                $0.userInterfaceStyle == .dark ? dark : light
+            }
+        } else {
+            self.init(cgColor: light.cgColor)
+        }
+    }
 }

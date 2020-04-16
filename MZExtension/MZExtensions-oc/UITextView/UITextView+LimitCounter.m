@@ -85,8 +85,8 @@ static char labHeightKey;
 
 #pragma mark - config
 - (void)configTextView {
-    self.labMargin = 10;
-    self.labHeight = 20;
+    self.labMargin = 10.0;
+    self.labHeight = 20.0;
 }
 
 #pragma mark - update

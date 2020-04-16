@@ -16,7 +16,7 @@ extension UIImage {
     }
     
     /// return compressed image to rate from 0.0 to 1.0
-    public func compressImage(rate: CGFloat) -> Data? {
+    public func compressImage(rate: CGFloat = 1.0) -> Data? {
         return self.jpegData(compressionQuality: rate)
     }
     
@@ -110,5 +110,41 @@ extension UIImage {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image!
+    }
+    
+    /// rounded image
+    public func rounded(cornerRadius: CGFloat? = nil, borderWidth: CGFloat = 0.0, borderColor: UIColor = .white) -> UIImage {
+        let diameter = min(self.size.width, self.size.height)
+        let isLandscape = self.size.width > self.size.height
+        let xOffset = isLandscape ? (self.size.width - diameter) / 2.0 : 0
+        let yOffset = isLandscape ? 0 : (self.size.height - diameter) / 2.0
+        let imageSize = CGSize(width: diameter, height: diameter)
+        return UIGraphicsImageRenderer(size: imageSize).image { _ in
+            let roundedPath = UIBezierPath(roundedRect: CGRect(origin: .zero, size: imageSize), cornerRadius: cornerRadius ?? diameter / 2.0)
+            roundedPath.addClip()
+            self.draw(at: CGPoint(x: -xOffset, y: -yOffset))
+            if borderWidth > 0 {
+                borderColor.setStroke()
+                roundedPath.lineWidth = borderWidth
+                roundedPath.stroke()
+            }
+        }
+    }
+    
+    /// return the color of image at point
+    public func pixelColor(at point: CGPoint) -> UIColor? {
+        let size = self.cgImage.map { CGSize(width: $0.width, height: $0.height) } ?? self.size
+        guard point.x >= 0, point.x < size.width, point.y >= 0, point.y < size.height,
+            let data = self.cgImage?.dataProvider?.data,
+            let pointer = CFDataGetBytePtr(data) else {
+                return nil
+        }
+        let numberOfComponents = 4
+        let pixelData = Int((size.width * point.y) + point.x) * numberOfComponents
+        let r = CGFloat(pointer[pixelData]) / 255.0
+        let g = CGFloat(pointer[pixelData + 1]) / 255.0
+        let b = CGFloat(pointer[pixelData + 2]) / 255.0
+        let a = CGFloat(pointer[pixelData + 3]) / 255.0
+        return UIColor(red: r, green: g, blue: b, alpha: a)
     }
 }
