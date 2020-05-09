@@ -9,44 +9,44 @@
 import UIKit
 
 public enum FontType: String {
-    case None = ""
-    case Regular = "Regular"
-    case Bold = "Bold"
-    case DemiBold = "DemiBold"
-    case Light = "Light"
-    case UltraLight = "UltraLight"
-    case Italic = "Italic"
-    case Thin = "Thin"
-    case Book = "Book"
-    case Roman = "Roman"
-    case Medium = "Medium"
-    case MediumItalic = "MediumItalic"
-    case CondensedMedium = "CondensedMedium"
-    case CondensedExtraBold = "CondensedExtraBold"
-    case SemiBold = "SemiBold"
-    case BoldItalic = "BoldItalic"
-    case Heavy = "Heavy"
+    case none = ""
+    case regular = "Regular"
+    case bold = "Bold"
+    case demiBold = "DemiBold"
+    case light = "Light"
+    case ultraLight = "UltraLight"
+    case italic = "Italic"
+    case thin = "Thin"
+    case book = "Book"
+    case roman = "Roman"
+    case medium = "Medium"
+    case mediumItalic = "MediumItalic"
+    case condensedMedium = "CondensedMedium"
+    case condensedExtraBold = "CondensedExtraBold"
+    case semiBold = "SemiBold"
+    case boldItalic = "BoldItalic"
+    case heavy = "Heavy"
 }
 
 public enum FontName: String {
-    case HelveticaNeue
-    case Helvetica
-    case Futura
-    case Menlo
-    case Avenir
-    case AvenirNext
-    case Didot
-    case AmericanTypewriter
-    case Baskerville
-    case Geneva
-    case GillSans
-    case SanFranciscoDisplay
-    case Seravek
+    case helveticaNeue = "HelveticaNeue"
+    case helvetica = "Helvetica"
+    case futura = "Futura"
+    case menlo = "Menlo"
+    case avenir = "Avenir"
+    case avenirNext = "AvenirNext"
+    case didot = "Didot"
+    case americanTypewriter = "AmericanTypewriter"
+    case baskerville = "Baskerville"
+    case geneva = "Geneva"
+    case gillSans = "GillSans"
+    case sanFranciscoDisplay = "SanFranciscoDisplay"
+    case seravek = "Seravek"
 }
 
 extension UIFont {
     
-    /// return font with FontName、FontType and size
+    /// 字体
     public class func font(_ name: FontName, type: FontType, size: CGFloat) -> UIFont {
         // use type
         let fontName = name.rawValue + "-" + type.rawValue
@@ -70,21 +70,21 @@ extension UIFont {
     
     /// return helveticaNeue font with FontType and size
     public class func helveticaNeue(type: FontType, size: CGFloat) -> UIFont {
-        return self.font(.HelveticaNeue, type: type, size: size)
+        return self.font(.helveticaNeue, type: type, size: size)
     }
     
     /// return avenirNext font with FontType and size
     public class func avenirNext(type: FontType, size: CGFloat) -> UIFont {
-        return self.font(.AvenirNext, type: type, size: size)
+        return self.font(.avenirNext, type: type, size: size)
     }
     
     /// return avenirNextDemiBold font with size
     public class func avenirNextDemiBold(size: CGFloat) -> UIFont {
-        return self.font(.AvenirNext, type: .DemiBold, size: size)
+        return self.font(.avenirNext, type: .demiBold, size: size)
     }
     
     /// return avenirNextRegular font with size
     public class func avenirNextRegular(size: CGFloat) -> UIFont {
-        return self.font(.AvenirNext, type: .Regular, size: size)
+        return self.font(.avenirNext, type: .regular, size: size)
     }
 }

@@ -9,17 +9,26 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        var tempStr = "123456" as NSString
-        let enResult = tempStr.aesEncrypt(withKey: "88888888", type: .type128)
-        tempStr = "205a33ee54e15937d3cc1ca010b468ee"
-        let deResult = tempStr.aesDecrypt(withKey: "88888888", type: .type128)
-        print(enResult)
-        print(deResult)
+        let view = UIView(frame: CGRect(x: 100, y: 200, width: 100, height: 200))
+        view.backgroundColor = UIColor.red
+        self.view.addSubview(view)
+        
+        let btn = UIButton(type: .custom)
+        btn.frame = CGRect(x: 30, y: 80, width: 40, height: 40)
+        btn.backgroundColor = UIColor.blue
+        btn.addTarget(self, action: #selector(btnClicked(btn:)), for: .touchUpInside)
+        // 扩充按钮的点击区域
+        btn.mz_clickEdgeInsets = UIEdgeInsets(top: 80, left: 30, bottom: 80, right: 30)
+        view.addSubview(btn)
+    }
+    
+    @objc func btnClicked(btn: UIButton) {
+        btn.backgroundColor = UIColor.random()
     }
 }
 

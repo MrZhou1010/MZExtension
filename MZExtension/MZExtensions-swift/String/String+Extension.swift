@@ -25,6 +25,7 @@ extension String {
         NSLocalizedString(self, comment: self)
     }
     
+    /// 多语言
     public func localized(withTableName tableName: String? = nil, bundle: Bundle = Bundle.main, value: String = "") -> String {
         NSLocalizedString(self, tableName: tableName, bundle: bundle, value: value, comment: self)
     }
@@ -32,29 +33,29 @@ extension String {
 
 extension String {
     subscript (bounds: CountableClosedRange<Int>) -> String {
-        let start = index(startIndex, offsetBy: bounds.lowerBound)
-        let end = index(startIndex, offsetBy: bounds.upperBound)
+        let start = index(self.startIndex, offsetBy: bounds.lowerBound)
+        let end = index(self.startIndex, offsetBy: bounds.upperBound)
         return String(self[start...end])
     }
     
     subscript (bounds: CountableRange<Int>) -> String {
-        let start = index(startIndex, offsetBy: bounds.lowerBound)
-        let end = index(startIndex, offsetBy: bounds.upperBound)
+        let start = index(self.startIndex, offsetBy: bounds.lowerBound)
+        let end = index(self.startIndex, offsetBy: bounds.upperBound)
         return String(self[start..<end])
     }
     
     subscript (bounds: PartialRangeUpTo<Int>) -> String {
-        let end = index(startIndex, offsetBy: bounds.upperBound)
-        return String(self[startIndex..<end])
+        let end = index(self.startIndex, offsetBy: bounds.upperBound)
+        return String(self[self.startIndex..<end])
     }
     
     subscript (bounds: PartialRangeThrough<Int>) -> String {
-        let end = index(startIndex, offsetBy: bounds.upperBound)
-        return String(self[startIndex...end])
+        let end = index(self.startIndex, offsetBy: bounds.upperBound)
+        return String(self[self.startIndex...end])
     }
     
     subscript (bounds: CountablePartialRangeFrom<Int>) -> String {
-        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let start = index(self.startIndex, offsetBy: bounds.lowerBound)
         return String(self[start..<endIndex])
     }
 }

@@ -10,42 +10,42 @@ import UIKit
 
 extension CGFloat {
     
-    /// return the central value of CGFloat
+    /// 中心值
     public var center: CGFloat {
         return (self / 2.0)
     }
     
-    /// converts angle degrees to radians
+    /// 将角度转换为弧度
     public func degreesToRadians() -> CGFloat {
         return (.pi * self) / 180.0
     }
     
-    /// converts angle degrees to radians static version
+    /// 将角度转换为弧度
     public static func degreesToRadians(_ angle: CGFloat) -> CGFloat {
         return (.pi * angle) / 180.0
     }
     
-    /// converts radians to degrees
+    /// 将弧度转换为角度
     public func radiansToDegrees() -> CGFloat {
         return (180.0 * self) / .pi
     }
     
-    /// converts angle radians to degrees static version
+    /// 将弧度转换为角度
     public static func radiansToDegrees(_ angleInDegrees: CGFloat) -> CGFloat {
         return (180.0 * angleInDegrees) / .pi
     }
     
-    /// return a random floating point number between 0.0 and 1.0, inclusive
+    /// 随机浮点数(0.0~1.0)
     public static func random() -> CGFloat {
         return CGFloat(Double(arc4random()) / 0xFFFFFFFF)
     }
     
-    /// return a random floating point number in the range min...max, inclusive
+    /// 随机浮点数(min~max)
     public static func random(within: Range<CGFloat>) -> CGFloat {
         return CGFloat.random() * (within.upperBound - within.lowerBound) + within.lowerBound
     }
     
-    /// return a random floating point number in the range min...max, inclusive
+    /// 随机浮点数(min~max)
     public static func random(within: ClosedRange<CGFloat>) -> CGFloat {
         return CGFloat.random() * (within.upperBound - within.lowerBound) + within.lowerBound
     }

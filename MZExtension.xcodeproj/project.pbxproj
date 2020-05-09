@@ -19,6 +19,7 @@
 		B409C81F23A3868D00EC80F8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B409C81E23A3868D00EC80F8 /* UIView+Extension.swift */; };
 		B409C82223A3905900EC80F8 /* UIButton+MZImageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B409C82023A3905900EC80F8 /* UIButton+MZImageTitle.swift */; };
 		B409C82323A3905900EC80F8 /* UIImageView+MZGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = B409C82123A3905900EC80F8 /* UIImageView+MZGif.swift */; };
+		B43E506224665C2B00CB2895 /* UIButton+MZHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43E506124665C2B00CB2895 /* UIButton+MZHit.swift */; };
 		B471E46223BDDCC900B6C801 /* NSString+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = B471E46123BDDCC900B6C801 /* NSString+AES256.m */; };
 		B4A3809123AA227E0047D178 /* NSString+RegExp.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A3809023AA227E0047D178 /* NSString+RegExp.m */; };
 		B4DC895923A2322500C75FC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC895823A2322500C75FC2 /* AppDelegate.swift */; };
@@ -67,6 +68,7 @@
 		B409C81E23A3868D00EC80F8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		B409C82023A3905900EC80F8 /* UIButton+MZImageTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+MZImageTitle.swift"; sourceTree = "<group>"; };
 		B409C82123A3905900EC80F8 /* UIImageView+MZGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+MZGif.swift"; sourceTree = "<group>"; };
+		B43E506124665C2B00CB2895 /* UIButton+MZHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+MZHit.swift"; sourceTree = "<group>"; };
 		B471E46023BDDCC900B6C801 /* NSString+AES256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+AES256.h"; sourceTree = "<group>"; };
 		B471E46123BDDCC900B6C801 /* NSString+AES256.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+AES256.m"; sourceTree = "<group>"; };
 		B4A3808F23AA227E0047D178 /* NSString+RegExp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+RegExp.h"; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				B409C82023A3905900EC80F8 /* UIButton+MZImageTitle.swift */,
+				B43E506124665C2B00CB2895 /* UIButton+MZHit.swift */,
 				B409C82123A3905900EC80F8 /* UIImageView+MZGif.swift */,
 				B409C81E23A3868D00EC80F8 /* UIView+Extension.swift */,
 				B4048D5F24470F16003FF984 /* UITableView+Extension.swift */,
@@ -420,6 +423,7 @@
 				B4DC895B23A2322500C75FC2 /* SceneDelegate.swift in Sources */,
 				B4A3809123AA227E0047D178 /* NSString+RegExp.m in Sources */,
 				B4048D6024470F16003FF984 /* UITableView+Extension.swift in Sources */,
+				B43E506224665C2B00CB2895 /* UIButton+MZHit.swift in Sources */,
 				B409C82323A3905900EC80F8 /* UIImageView+MZGif.swift in Sources */,
 				B4DC899223A2428400C75FC2 /* CGFloat+Extension.swift in Sources */,
 				B471E46223BDDCC900B6C801 /* NSString+AES256.m in Sources */,
@@ -601,8 +605,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4GKD84VMPR;
 				INFOPLIST_FILE = MZExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -623,8 +628,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4GKD84VMPR;
 				INFOPLIST_FILE = MZExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
