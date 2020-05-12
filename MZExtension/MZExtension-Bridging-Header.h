@@ -7,3 +7,4 @@
 #import "NSString+RegExp.h"
 #import "UITextView+LimitCounter.h"
 #import "UITextView+PlaceHolder.h"
+#import "UITableViewCell+CardCell.h"

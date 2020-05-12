@@ -29,6 +29,9 @@ class ViewController: UIViewController {
     
     @objc func btnClicked(btn: UIButton) {
         btn.backgroundColor = UIColor.random()
+        let vc = MZCardTableViewVC()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 }
 
