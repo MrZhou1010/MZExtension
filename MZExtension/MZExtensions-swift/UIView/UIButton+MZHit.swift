@@ -2,7 +2,7 @@
 //  UIButton+MZHit.swift
 //  MZExtension
 //
-//  Created by 木木 on 2020/5/9.
+//  Created by Mr.Z on 2020/5/9.
 //  Copyright © 2020 Mr.Z. All rights reserved.
 //
 

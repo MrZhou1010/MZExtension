@@ -105,8 +105,8 @@ extension UIImage {
     }
     
     /// 返回空白的图片
-    public class func blankImage() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 1.0, height: 1.0), false, 0.0)
+    public class func blankImage(width: CGFloat = 1.0, height: CGFloat = 1.0) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height), false, 0.0)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image!

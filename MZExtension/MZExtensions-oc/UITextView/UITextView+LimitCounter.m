@@ -45,7 +45,7 @@ static char labHeightKey;
         self.contentInset = textContainerInset;
         CGFloat x = CGRectGetMinX(self.frame) + self.layer.borderWidth;
         CGFloat y = CGRectGetMaxY(self.frame) - self.contentInset.bottom - self.layer.borderWidth;
-        CGFloat width = CGRectGetWidth(self.bounds) - self.layer.borderWidth * 2;
+        CGFloat width = CGRectGetWidth(self.bounds) - self.layer.borderWidth * 2.0;
         CGFloat height = self.labHeight;
         self.inputLimitLabel.frame = CGRectMake(x, y, width, height);
         if ([self.superview.subviews containsObject:self.inputLimitLabel]) {

@@ -2,7 +2,7 @@
 //  UITableViewCell+CardCell.h
 //  MZExtension
 //
-//  Created by 木木 on 2020/5/11.
+//  Created by Mr.Z on 2020/5/11.
 //  Copyright © 2020 Mr.Z. All rights reserved.
 //
 

@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         self.view.addSubview(view)
         
         let btn = UIButton(type: .custom)
-        btn.frame = CGRect(x: 30, y: 80, width: 40, height: 40)
+        btn.frame = CGRect(x: 80, y: 80, width: 40, height: 40)
         btn.backgroundColor = UIColor.blue
         btn.addTarget(self, action: #selector(btnClicked(btn:)), for: .touchUpInside)
         // 扩充按钮的点击区域
@@ -34,4 +34,3 @@ class ViewController: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
 }
-

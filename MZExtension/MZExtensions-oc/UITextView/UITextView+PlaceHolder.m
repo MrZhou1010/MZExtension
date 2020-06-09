@@ -41,7 +41,7 @@ static const void *mz_placeHolderKey;
         CGFloat lineFragmentPadding = self.textContainer.lineFragmentPadding;
         CGFloat x = lineFragmentPadding + textContainerInset.left + self.layer.borderWidth;
         CGFloat y = textContainerInset.top + self.layer.borderWidth;
-        CGFloat width = CGRectGetWidth(self.bounds) - x - textContainerInset.right - 2 * self.layer.borderWidth;
+        CGFloat width = CGRectGetWidth(self.bounds) - x - textContainerInset.right - 2.0 * self.layer.borderWidth;
         CGFloat height = [self.mz_placeHolderLabel sizeThatFits:CGSizeMake(width, 0)].height;
         self.mz_placeHolderLabel.frame = CGRectMake(x, y, width, height);
     }

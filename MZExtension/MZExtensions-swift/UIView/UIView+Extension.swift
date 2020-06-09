@@ -38,17 +38,11 @@ extension UIView {
     }
     
     /// 设置边框颜色及边框宽度
-    public func setBorder(with color: UIColor, width: CGFloat) {
+    public func setBorder(with color: UIColor, width: CGFloat = 1.0) {
         self.layer.borderColor = color.cgColor
         self.layer.borderWidth = width
     }
-    
-    /// 设置边框颜色
-    public func setBorder(with color: UIColor) {
-        self.layer.borderColor = color.cgColor
-        self.layer.borderWidth = 1
-    }
-    
+
     /// 设置某几个角的圆角
     public func setCorner(byRoundingCorners corners: UIRectCorner, radii: CGFloat) {
         let maskPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radii, height: radii))
@@ -59,7 +53,7 @@ extension UIView {
     }
     
     /// 设置虚线
-    public func addDashLine(strokeColor: UIColor, lineWidth: CGFloat, lineDashPattern: [NSNumber]) {
+    public func addDashLine(strokeColor: UIColor, lineWidth: CGFloat = 1.0, lineDashPattern: [NSNumber]) {
         let borderLayer = CAShapeLayer()
         borderLayer.bounds = self.bounds
         borderLayer.anchorPoint = CGPoint(x: 0, y: 0)
@@ -76,7 +70,7 @@ extension UIView {
     }
     
     /// 设置点画线
-    public func addDottedLine(strokeColor: UIColor, frame: CGRect, lineWidth: CGFloat, lineDashPattern: [NSNumber]) {
+    public func addDottedLine(strokeColor: UIColor, frame: CGRect, lineWidth: CGFloat = 1.0, lineDashPattern: [NSNumber]) {
         let borderLayer = CAShapeLayer()
         borderLayer.strokeColor = strokeColor.cgColor
         borderLayer.fillColor = UIColor.clear.cgColor
@@ -90,7 +84,7 @@ extension UIView {
     }
     
     /// 设置渐变颜色
-    public func setGradientColor(colors: [Any], startPoint: CGPoint, endPoint: CGPoint) {
+    public func setGradientColor(colors: [CGColor], startPoint: CGPoint, endPoint: CGPoint) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
         // 设置渐变的主颜色（可多个颜色添加）
