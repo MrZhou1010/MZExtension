@@ -86,7 +86,7 @@
 }
 
 /// 是否包含有空格
-- (BOOL)isHaveSpace {
+- (BOOL)isHadSpace {
     NSRange range = [self rangeOfString:@" "];
     return range.location == NSNotFound ? NO : YES;
 }

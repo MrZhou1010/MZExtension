@@ -23,6 +23,7 @@
 		B42428682468F0E100360980 /* MZCardTableViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42428672468F0E100360980 /* MZCardTableViewVC.swift */; };
 		B43E506224665C2B00CB2895 /* UIButton+MZHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43E506124665C2B00CB2895 /* UIButton+MZHit.swift */; };
 		B471E46223BDDCC900B6C801 /* NSString+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = B471E46123BDDCC900B6C801 /* NSString+AES256.m */; };
+		B48FCF9524F8A94900344FC0 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48FCF9424F8A94900344FC0 /* Array+Extension.swift */; };
 		B4A3809123AA227E0047D178 /* NSString+RegExp.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A3809023AA227E0047D178 /* NSString+RegExp.m */; };
 		B4DC895923A2322500C75FC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC895823A2322500C75FC2 /* AppDelegate.swift */; };
 		B4DC895B23A2322500C75FC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC895A23A2322500C75FC2 /* SceneDelegate.swift */; };
@@ -76,6 +77,7 @@
 		B43E506124665C2B00CB2895 /* UIButton+MZHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+MZHit.swift"; sourceTree = "<group>"; };
 		B471E46023BDDCC900B6C801 /* NSString+AES256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+AES256.h"; sourceTree = "<group>"; };
 		B471E46123BDDCC900B6C801 /* NSString+AES256.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+AES256.m"; sourceTree = "<group>"; };
+		B48FCF9424F8A94900344FC0 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		B4A3808F23AA227E0047D178 /* NSString+RegExp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+RegExp.h"; sourceTree = "<group>"; };
 		B4A3809023AA227E0047D178 /* NSString+RegExp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+RegExp.m"; sourceTree = "<group>"; };
 		B4DC895523A2322500C75FC2 /* MZExtension.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZExtension.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +164,14 @@
 			path = UITableViewCell;
 			sourceTree = "<group>";
 		};
+		B48FCF9324F8A91400344FC0 /* Array */ = {
+			isa = PBXGroup;
+			children = (
+				B48FCF9424F8A94900344FC0 /* Array+Extension.swift */,
+			);
+			path = Array;
+			sourceTree = "<group>";
+		};
 		B4DC894C23A2322400C75FC2 = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +231,7 @@
 		B4DC898823A2378100C75FC2 /* MZExtensions-swift */ = {
 			isa = PBXGroup;
 			children = (
+				B48FCF9324F8A91400344FC0 /* Array */,
 				B409C81723A36CF200EC80F8 /* UIImage */,
 				B4DC899323A247A400C75FC2 /* UIFont */,
 				B4DC899023A240C300C75FC2 /* CGFloat */,
@@ -444,6 +455,7 @@
 				B409C82323A3905900EC80F8 /* UIImageView+MZGif.swift in Sources */,
 				B4DC899223A2428400C75FC2 /* CGFloat+Extension.swift in Sources */,
 				B471E46223BDDCC900B6C801 /* NSString+AES256.m in Sources */,
+				B48FCF9524F8A94900344FC0 /* Array+Extension.swift in Sources */,
 				B409C81B23A383A400EC80F8 /* String+Extension.swift in Sources */,
 				B42428682468F0E100360980 /* MZCardTableViewVC.swift in Sources */,
 				5AA4AAF823A7B1AD00E850D8 /* NSString+Hash.m in Sources */,

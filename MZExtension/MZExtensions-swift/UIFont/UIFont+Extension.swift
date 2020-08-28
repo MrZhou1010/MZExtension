@@ -47,7 +47,7 @@ public enum FontName: String {
 extension UIFont {
     
     /// 字体
-    public class func font(_ name: FontName, type: FontType, size: CGFloat) -> UIFont {
+    public class func font(_ name: FontName, _ type: FontType, _ size: CGFloat) -> UIFont {
         // use type
         let fontName = name.rawValue + "-" + type.rawValue
         if let font = UIFont(name: fontName, size: size) {
@@ -70,21 +70,21 @@ extension UIFont {
     
     /// return helveticaNeue font with FontType and size
     public class func helveticaNeue(type: FontType, size: CGFloat) -> UIFont {
-        return self.font(.helveticaNeue, type: type, size: size)
+        return self.font(.helveticaNeue, type, size)
     }
     
     /// return avenirNext font with FontType and size
     public class func avenirNext(type: FontType, size: CGFloat) -> UIFont {
-        return self.font(.avenirNext, type: type, size: size)
+        return self.font(.avenirNext, type, size)
     }
     
     /// return avenirNextDemiBold font with size
     public class func avenirNextDemiBold(size: CGFloat) -> UIFont {
-        return self.font(.avenirNext, type: .demiBold, size: size)
+        return self.font(.avenirNext, .demiBold, size)
     }
     
     /// return avenirNextRegular font with size
     public class func avenirNextRegular(size: CGFloat) -> UIFont {
-        return self.font(.avenirNext, type: .regular, size: size)
+        return self.font(.avenirNext, .regular, size)
     }
 }

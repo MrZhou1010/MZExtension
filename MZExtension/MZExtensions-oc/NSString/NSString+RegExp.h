@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isEmail;
 
 /// 是否包含有空格
-- (BOOL)isHaveSpace;
+- (BOOL)isHadSpace;
 
 /// 非空字符判断
 - (BOOL)isEmptyString;

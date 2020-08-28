@@ -16,7 +16,7 @@ extension UIImage {
     }
     
     /// 压缩图片
-    public func compressImage(rate: CGFloat = 1.0) -> Data? {
+    public func compressImage(_ rate: CGFloat = 1.0) -> Data? {
         return self.jpegData(compressionQuality: rate)
     }
     
@@ -32,8 +32,8 @@ extension UIImage {
     }
     
     /// 改变图片的尺寸
-    public func scaleImage(w: CGFloat, h: CGFloat) -> UIImage {
-        let newSize = CGSize(width: w, height: h)
+    public func scaleImage(_ width: CGFloat, _ height: CGFloat) -> UIImage {
+        let newSize = CGSize(width: width, height: height)
         UIGraphicsBeginImageContextWithOptions(newSize, false, UIScreen.main.scale)
         self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
@@ -43,12 +43,12 @@ extension UIImage {
     
     /// 根据宽度改变图片的尺寸
     public func resizeWithWidth(_ width: CGFloat) -> UIImage {
-        self.scaleImage(w: width, h: self.aspectHeightForWidth(width))
+        self.scaleImage(width, self.aspectHeightForWidth(width))
     }
     
     /// 根据高度改变图片的尺寸
     public func resizeWithHeight(_ height: CGFloat) -> UIImage {
-        self.scaleImage(w: self.aspectWidthForHeight(height), h: height)
+        self.scaleImage(self.aspectWidthForHeight(height), height)
     }
     
     /// 根据宽度获取图片的高度
@@ -75,18 +75,18 @@ extension UIImage {
         return croppedImage
     }
     
-    /// use current image for pattern of color
+    /// 用颜色填充图片
     public func imageWithColor(_ tintColor: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         let context = UIGraphicsGetCurrentContext()
         context?.translateBy(x: 0, y: self.size.height)
         context?.scaleBy(x: 1.0, y: -1.0)
         context?.setBlendMode(CGBlendMode.normal)
-        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height) as CGRect
+        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         context?.clip(to: rect, mask: self.cgImage!)
         tintColor.setFill()
         context?.fill(rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()! as UIImage
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return newImage
     }
@@ -147,7 +147,7 @@ extension UIImage {
     }
     
     /// 获取图片某一个位置像素的颜色
-    public func pixelColor(at point: CGPoint) -> UIColor? {
+    public func pixelColor(_ point: CGPoint) -> UIColor? {
         let size = self.cgImage.map { CGSize(width: $0.width, height: $0.height) } ?? self.size
         guard point.x >= 0, point.x < size.width, point.y >= 0, point.y < size.height,
             let data = self.cgImage?.dataProvider?.data,

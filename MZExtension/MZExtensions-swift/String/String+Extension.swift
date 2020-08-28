@@ -20,6 +20,11 @@ extension String {
         URL(string: self)
     }
     
+    /// base64编码
+    public var base64: String {
+        return self.data(using: .utf8)?.base64EncodedString() ?? ""
+    }
+    
     /// 多语言
     public var localized: String {
         NSLocalizedString(self, comment: self)
@@ -29,34 +34,38 @@ extension String {
     public func localized(withTableName tableName: String? = nil, bundle: Bundle = Bundle.main, value: String = "") -> String {
         NSLocalizedString(self, tableName: tableName, bundle: bundle, value: value, comment: self)
     }
+    
+    /// 删除前后空格和换行
+    public func trimmed() -> String {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
 }
 
 extension String {
-    subscript (bounds: CountableClosedRange<Int>) -> String {
-        let start = index(self.startIndex, offsetBy: bounds.lowerBound)
-        let end = index(self.startIndex, offsetBy: bounds.upperBound)
+    public subscript (bounds: CountableClosedRange<Int>) -> String {
+        let start = self.index(self.startIndex, offsetBy: bounds.lowerBound)
+        let end = self.index(self.startIndex, offsetBy: bounds.upperBound)
         return String(self[start...end])
     }
     
-    subscript (bounds: CountableRange<Int>) -> String {
-        let start = index(self.startIndex, offsetBy: bounds.lowerBound)
-        let end = index(self.startIndex, offsetBy: bounds.upperBound)
+    public subscript (bounds: CountableRange<Int>) -> String {
+        let start = self.index(self.startIndex, offsetBy: bounds.lowerBound)
+        let end = self.index(self.startIndex, offsetBy: bounds.upperBound)
         return String(self[start..<end])
     }
     
-    subscript (bounds: PartialRangeUpTo<Int>) -> String {
-        let end = index(self.startIndex, offsetBy: bounds.upperBound)
+    public subscript (bounds: PartialRangeUpTo<Int>) -> String {
+        let end = self.index(self.startIndex, offsetBy: bounds.upperBound)
         return String(self[self.startIndex..<end])
     }
     
-    subscript (bounds: PartialRangeThrough<Int>) -> String {
-        let end = index(self.startIndex, offsetBy: bounds.upperBound)
+    public subscript (bounds: PartialRangeThrough<Int>) -> String {
+        let end = self.index(self.startIndex, offsetBy: bounds.upperBound)
         return String(self[self.startIndex...end])
     }
     
-    subscript (bounds: CountablePartialRangeFrom<Int>) -> String {
-        let start = index(self.startIndex, offsetBy: bounds.lowerBound)
+    public subscript (bounds: CountablePartialRangeFrom<Int>) -> String {
+        let start = self.index(self.startIndex, offsetBy: bounds.lowerBound)
         return String(self[start..<endIndex])
     }
 }
-
