@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         view.addSubview(btn)
     }
     
-    @objc func btnClicked(btn: UIButton) {
+    @objc private func btnClicked(btn: UIButton) {
         btn.backgroundColor = UIColor.random()
         let vc = MZCardTableViewVC()
         vc.modalPresentationStyle = .fullScreen

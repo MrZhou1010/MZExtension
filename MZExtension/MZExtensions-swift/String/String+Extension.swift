@@ -39,6 +39,16 @@ extension String {
     public func trimmed() -> String {
         return self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
+    
+    /// 判断是否为汉字
+    public func isChinese() -> Bool {
+        if self == "" {
+            return false
+        }
+        let chinese = "^[\\u4e00-\\u9fa5]{0,}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", chinese)
+        return predicate.evaluate(with: self)
+    }
 }
 
 extension String {

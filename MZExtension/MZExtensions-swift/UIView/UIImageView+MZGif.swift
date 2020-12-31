@@ -12,9 +12,8 @@ import UIKit
 extension UIImageView {
     
     /// 设置Gif图像
-    ///
     /// - Parameters:
-    ///   - url: 图像地址
+    ///   - urlString: 图像地址
     ///   - completion: callback
     public func setImage(_ urlString: String, completion: (() -> ())?) {
         DispatchQueue.global().async {

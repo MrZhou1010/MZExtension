@@ -23,7 +23,7 @@ class MZCardTableViewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        self.tableView.frame = CGRect(x: 15, y: 64, width: self.view.bounds.size.width - 30, height: self.view.bounds.size.height - 64)
+        self.tableView.frame = CGRect(x: 15.0, y: 64.0, width: self.view.bounds.size.width - 30.0, height: self.view.bounds.size.height - 64.0)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         self.view.addSubview(self.tableView)
     }

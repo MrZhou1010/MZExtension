@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 public enum MZButtonEdgeInsetsStyle: Int {
-    case top // image在上，label在下
-    case left // image在左，label在右
-    case bottom // image在下，label在上
-    case right // image在右，label在左
+    case top // image在上,label在下
+    case left // image在左,label在右
+    case bottom // image在下,label在上
+    case right // image在右,label在左
 }
 
 extension UIButton {

@@ -89,8 +89,8 @@ extension UIView {
         gradientLayer.frame = self.bounds
         // 设置渐变的主颜色（可多个颜色添加）
         gradientLayer.colors = colors
-        // startPoint与endPoint分别为渐变的起始方向与结束方向，它是以矩形的四个角为基础的，
-        //（0，0）为左上角、（1，0）为右上角、（0，1）为左下角、（1，1）为右下角，默认是值是（0.5，0）和（0.5，1）
+        // startPoint与endPoint分别为渐变的起始方向与结束方向,它是以矩形的四个角为基础的,
+        //（0,0）为左上角、（1,0）为右上角、（0,1）为左下角、（1,1）为右下角,默认是值是（0.5,0）和（0.5,1）
         gradientLayer.startPoint = startPoint
         gradientLayer.endPoint = endPoint
         // 将gradientLayer作为子layer添加到主layer上
