@@ -54,7 +54,7 @@
     return [predicate evaluateWithObject:self];
 }
 
-/// 身份证号验证（15位或18位数字）
+/// 身份证号验证(15位或18位数字)
 - (BOOL)isCardID {
     if (self.length != 15 && self.length != 18) {
         return NO;

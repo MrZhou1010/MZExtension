@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 手机号码验证
 - (BOOL)isMobileNumber;
 
-/// 身份证号验证（15位或18位数字）
+/// 身份证号验证(15位或18位数字)
 - (BOOL)isCardID;
 
 /// 密码验证

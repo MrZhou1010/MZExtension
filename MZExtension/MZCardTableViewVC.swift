@@ -11,7 +11,7 @@ import UIKit
 class MZCardTableViewVC: UIViewController {
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView.init(frame: .zero, style: .plain)
+        let tableView = UITableView.init(frame: .zero, style: .grouped)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.showsVerticalScrollIndicator = false
@@ -24,7 +24,7 @@ class MZCardTableViewVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         self.tableView.frame = CGRect(x: 15.0, y: 64.0, width: self.view.bounds.size.width - 30.0, height: self.view.bounds.size.height - 64.0)
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "identifier")
         self.view.addSubview(self.tableView)
     }
 }
@@ -40,7 +40,7 @@ extension MZCardTableViewVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "identifier", for: indexPath)
         cell.backgroundColor = UIColor(hexString: "#666666")
         cell.textLabel?.textColor = UIColor.random()
         cell.textLabel?.text = "第\(indexPath.section)组\(indexPath.row)行"

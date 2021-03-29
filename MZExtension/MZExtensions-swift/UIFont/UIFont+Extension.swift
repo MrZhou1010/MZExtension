@@ -53,14 +53,12 @@ extension UIFont {
         if let font = UIFont(name: fontName, size: size) {
             return font
         }
-        
-        // that font doens't have that type,try .None
+        // that font doens't have that type,try .none
         let fontNameNone = name.rawValue
         if let font = UIFont(name: fontNameNone, size: size) {
             return font
         }
-        
-        // that font doens't have that type,try .Regular
+        // that font doens't have that type,try .regular
         let fontNameRegular = name.rawValue + "-" + "Regular"
         if let font = UIFont(name: fontNameRegular, size: size) {
             return font

@@ -1,5 +1,5 @@
 //
-//  NSString+AES256.h
+//  NSString+AES.h
 //  MZExtension
 //
 //  Created by Mr.Z on 2019/12/16.
@@ -12,14 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, AESCryptoType) {
     AESCryptoType128 = 0,
-    AESCryptoType256,
+    AESCryptoType256 = 1
 };
 
-@interface NSString (AES256)
+@interface NSString (AES)
 
 /**
  *  AES加密结果
- *
  *  @param key 加解密密钥
  *  @param type 加解密类型
  *  @return 加密结果
@@ -28,7 +27,6 @@ typedef NS_ENUM(NSInteger, AESCryptoType) {
 
 /**
  *  AES解密结果
- *
  *  @param key 加解密密钥
  *  @param type 加解密类型
  *  @return 加密结果
@@ -37,7 +35,6 @@ typedef NS_ENUM(NSInteger, AESCryptoType) {
 
 /**
  *  AES加密结果
- *
  *  @param data 加解数据
  *  @param key 加解密密钥
  *  @param type 加解密类型
@@ -47,7 +44,6 @@ typedef NS_ENUM(NSInteger, AESCryptoType) {
 
 /**
  *  AES加密结果
- *
  *  @param data 解密数据
  *  @param key 加解密密钥
  *  @param type 加解密类型

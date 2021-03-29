@@ -12,8 +12,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+        self.setupUI()
+    }
+    
+    private func setupUI() {
         let view = UIView(frame: CGRect(x: 100, y: 200, width: 100, height: 200))
         view.backgroundColor = UIColor.red
         self.view.addSubview(view)
@@ -23,7 +25,7 @@ class ViewController: UIViewController {
         btn.backgroundColor = UIColor.blue
         btn.addTarget(self, action: #selector(btnClicked(btn:)), for: .touchUpInside)
         // 扩充按钮的点击区域
-        btn.mz_clickEdgeInsets = UIEdgeInsets(top: 80, left: 30, bottom: 80, right: 30)
+        btn.mz_clickEdgeInsets = UIEdgeInsets(top: 80, left: 80, bottom: 80, right: 80)
         view.addSubview(btn)
     }
     

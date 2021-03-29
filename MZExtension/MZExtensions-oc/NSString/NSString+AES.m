@@ -1,22 +1,23 @@
 //
-//  NSString+AES256.m
+//  NSString+AES.m
 //  MZExtension
 //
 //  Created by Mr.Z on 2019/12/16.
 //  Copyright © 2019 Mr.Z. All rights reserved.
 //
 
-#import "NSString+AES256.h"
+#import "NSString+AES.h"
 #import <CommonCrypto/CommonCrypto.h>
 
 /// 初始向量值(Initialization Vector)
-static NSString * const kIv = @"0102030405060708";
+static NSString * const kIv128 = @"0102030405060708";
+static NSString * const kIv256 = @"01020304050607080102030405060708";
 
-@implementation NSString (AES256)
+@implementation NSString (AES)
 
 - (NSString *)aesEncryptWithKey:(NSString *)key type:(AESCryptoType)type {
     const char *cStr = [self cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData *data = [NSData dataWithBytes:cStr length:[self length]];
+    NSData *data = [NSData dataWithBytes:cStr length:self.length];
     NSData *result = [[self class] aesEncryptWithData:data key:key type:type];
     if (result && result.length > 0) {
         Byte *tempData = (Byte *)[result bytes];
@@ -50,10 +51,10 @@ static NSString * const kIv = @"0102030405060708";
     NSData *result = nil;
     switch (type) {
         case AESCryptoType128:
-            result = [[self class] aes128CryptWithData:data key:key mode:kCCEncrypt iv:kIv];
+            result = [[self class] aes128CryptWithData:data key:key mode:kCCEncrypt iv:kIv128];
             break;
         case AESCryptoType256:
-            result = [[self class] aes256CryptWithData:data key:key mode:kCCEncrypt];
+            result = [[self class] aes256CryptWithData:data key:key mode:kCCEncrypt iv:kIv256];
             break;
         default:
             break;
@@ -65,10 +66,10 @@ static NSString * const kIv = @"0102030405060708";
     NSData *result = nil;
     switch (type) {
         case AESCryptoType128:
-            result = [[self class] aes128CryptWithData:data key:key mode:kCCDecrypt iv:kIv];
+            result = [[self class] aes128CryptWithData:data key:key mode:kCCDecrypt iv:kIv128];
             break;
         case AESCryptoType256:
-            result = [[self class] aes256CryptWithData:data key:key mode:kCCDecrypt];
+            result = [[self class] aes256CryptWithData:data key:key mode:kCCDecrypt iv:kIv256];
             break;
         default:
             break;
@@ -82,13 +83,18 @@ static NSString * const kIv = @"0102030405060708";
     [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
     NSUInteger dataLength = data.length;
     size_t bufferSize = dataLength + kCCBlockSizeAES128;
-    void * buffer = malloc(bufferSize);
+    void *buffer = malloc(bufferSize);
     size_t numBytesCrypted = 0;
-    NSString *initIv = iv;
-    char ivPtr[kCCBlockSizeAES128 + 1];
-    memset(ivPtr, 0, sizeof(ivPtr));
-    [initIv getCString:ivPtr maxLength:sizeof(ivPtr) encoding:NSUTF8StringEncoding];
-    CCCryptorStatus cryptStatus = CCCrypt(operation, kCCAlgorithmAES128, kCCOptionPKCS7Padding, keyPtr, kCCKeySizeAES128, ivPtr, [data bytes], dataLength, buffer, bufferSize, &numBytesCrypted);
+    CCCryptorStatus cryptStatus;
+    // 如果没有初始向量值,则使用ECB模式,否使用CBC模式
+    if (!iv || [iv isEqualToString:@""]) {
+        cryptStatus = CCCrypt(operation, kCCAlgorithmAES, kCCOptionPKCS7Padding | kCCOptionECBMode, keyPtr, kCCKeySizeAES128, NULL, [data bytes], dataLength, buffer, bufferSize, &numBytesCrypted);
+    } else {
+        char ivPtr[kCCBlockSizeAES128 + 1];
+        memset(ivPtr, 0, sizeof(ivPtr));
+        [iv getCString:ivPtr maxLength:sizeof(ivPtr) encoding:NSUTF8StringEncoding];
+        cryptStatus = CCCrypt(operation, kCCAlgorithmAES, kCCOptionPKCS7Padding, keyPtr, kCCKeySizeAES128, ivPtr, [data bytes], dataLength, buffer, bufferSize, &numBytesCrypted);
+    }
     if (cryptStatus == kCCSuccess) {
         return [NSData dataWithBytesNoCopy:buffer length:numBytesCrypted];
     }
@@ -96,15 +102,24 @@ static NSString * const kIv = @"0102030405060708";
     return nil;
 }
 
-+ (NSData *)aes256CryptWithData:(NSData *)data key:(NSString *)key mode:(CCOperation)operation {
++ (NSData *)aes256CryptWithData:(NSData *)data key:(NSString *)key mode:(CCOperation)operation iv:(NSString *)iv {
     char keyPtr[kCCKeySizeAES256 + 1];
     bzero(keyPtr, sizeof(keyPtr));
     [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
-    NSUInteger dataLength = [data length];
+    NSUInteger dataLength = data.length;
     size_t bufferSize = dataLength + kCCBlockSizeAES128;
     void *buffer = malloc(bufferSize);
     size_t numBytesCrypted = 0;
-    CCCryptorStatus cryptStatus = CCCrypt(operation, kCCAlgorithmAES128, kCCOptionPKCS7Padding | kCCOptionECBMode, keyPtr, kCCKeySizeAES256, NULL, [data bytes], dataLength, buffer, bufferSize, &numBytesCrypted);
+    CCCryptorStatus cryptStatus;
+    // 如果没有初始向量值,则使用ECB模式,否使用CBC模式
+    if (!iv || [iv isEqualToString:@""]) {
+        cryptStatus = CCCrypt(operation, kCCAlgorithmAES128, kCCOptionPKCS7Padding | kCCOptionECBMode, keyPtr, kCCKeySizeAES256, NULL, [data bytes], dataLength, buffer, bufferSize, &numBytesCrypted);
+    } else {
+        char ivPtr[kCCKeySizeAES256 + 1];
+        memset(ivPtr, 0, sizeof(ivPtr));
+        [iv getCString:ivPtr maxLength:sizeof(ivPtr) encoding:NSUTF8StringEncoding];
+        cryptStatus = CCCrypt(operation, kCCAlgorithmAES128, kCCOptionPKCS7Padding | kCCOptionECBMode, keyPtr, kCCKeySizeAES256, ivPtr, [data bytes], dataLength, buffer, bufferSize, &numBytesCrypted);
+    }
     if (cryptStatus == kCCSuccess) {
         return [NSData dataWithBytesNoCopy:buffer length:numBytesCrypted];
     }
