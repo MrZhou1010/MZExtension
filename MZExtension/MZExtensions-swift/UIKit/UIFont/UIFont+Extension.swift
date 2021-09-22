@@ -46,8 +46,35 @@ public enum FontName: String {
 
 extension UIFont {
     
+    public static func normalFont(_ name: String, _ size: CGFloat) -> UIFont {
+        if name.length > 0 {
+            return UIFont(name: name, size: size) ?? UIFont.systemFont(ofSize: size)
+        }
+        return UIFont.systemFont(ofSize: size)
+    }
+    
+    /// 细
+    public static func pingfangSC_light(ofSize size: CGFloat) -> UIFont {
+        return self.normalFont("PingFangSC-Light", size)
+    }
+    
+    /// 常规
+    public static func pingfangSC_regular(ofSize size: CGFloat) -> UIFont {
+        return self.normalFont("PingFangSC-Regular", size)
+    }
+    
+    /// 中等
+    public static func pingfangSC_medium(ofSize size: CGFloat) -> UIFont {
+        return self.normalFont("PingFangSC-Medium", size)
+    }
+    
+    /// 半黑体
+    public static func pingfangSC_semibold(ofSize size: CGFloat) -> UIFont {
+        return self.normalFont("PingFangSC-Semibold", size)
+    }
+    
     /// 字体
-    public class func font(_ name: FontName, _ type: FontType, _ size: CGFloat) -> UIFont {
+    public static func font(_ name: FontName, _ type: FontType, _ size: CGFloat) -> UIFont {
         // use type
         let fontName = name.rawValue + "-" + type.rawValue
         if let font = UIFont(name: fontName, size: size) {
@@ -67,22 +94,22 @@ extension UIFont {
     }
     
     /// return helveticaNeue font with FontType and size
-    public class func helveticaNeue(type: FontType, size: CGFloat) -> UIFont {
+    public static func helveticaNeue(type: FontType, size: CGFloat) -> UIFont {
         return self.font(.helveticaNeue, type, size)
     }
     
     /// return avenirNext font with FontType and size
-    public class func avenirNext(type: FontType, size: CGFloat) -> UIFont {
+    public static func avenirNext(type: FontType, size: CGFloat) -> UIFont {
         return self.font(.avenirNext, type, size)
     }
     
     /// return avenirNextDemiBold font with size
-    public class func avenirNextDemiBold(size: CGFloat) -> UIFont {
+    public static func avenirNextDemiBold(size: CGFloat) -> UIFont {
         return self.font(.avenirNext, .demiBold, size)
     }
     
     /// return avenirNextRegular font with size
-    public class func avenirNextRegular(size: CGFloat) -> UIFont {
+    public static func avenirNextRegular(size: CGFloat) -> UIFont {
         return self.font(.avenirNext, .regular, size)
     }
 }

@@ -10,6 +10,122 @@ import UIKit
 
 extension UIView {
     
+    /// 左
+    public var left: CGFloat {
+        set {
+            var frame = self.frame
+            frame.origin.x = newValue
+            self.frame = frame
+        }
+        get {
+            return self.frame.origin.x
+        }
+    }
+    
+    /// 上
+    public var top: CGFloat {
+        set {
+            var frame = self.frame
+            frame.origin.y = newValue
+            self.frame = frame
+        }
+        get {
+            return self.frame.origin.y
+        }
+    }
+    
+    /// 右
+    public var right: CGFloat {
+        set {
+            var frame = self.frame
+            frame.origin.x = newValue - frame.size.width
+            self.frame = frame
+        }
+        get {
+            return self.frame.origin.x + self.frame.size.width
+        }
+    }
+    
+    /// 下
+    public var bottom: CGFloat {
+        set {
+            var frame = self.frame
+            frame.origin.y = newValue - self.frame.size.height
+            self.frame = frame
+        }
+        get {
+            return self.frame.origin.y + self.frame.size.height
+        }
+    }
+    
+    /// 宽
+    public var width: CGFloat {
+        set {
+            var frame = self.frame
+            frame.size.width = newValue
+            self.frame = frame
+        }
+        get {
+            return self.frame.size.width
+        }
+    }
+    
+    /// 高
+    public var height: CGFloat {
+        set {
+            var frame = self.frame
+            frame.size.height = newValue
+            self.frame = frame
+        }
+        get {
+            return self.frame.size.height
+        }
+    }
+    
+    /// 中心点x
+    public var centerX: CGFloat {
+        set {
+            self.center = CGPoint(x: newValue, y: self.center.y)
+        }
+        get {
+            return self.center.x
+        }
+    }
+    
+    /// 中心点y
+    public var centerY: CGFloat {
+        set {
+            self.center = CGPoint(x: self.center.x, y: newValue)
+        }
+        get {
+            return self.center.y
+        }
+    }
+    
+    /// 位置
+    public var origin: CGPoint {
+        set {
+            var frame = self.frame
+            frame.origin = newValue
+            self.frame = frame
+        }
+        get {
+            return self.frame.origin
+        }
+    }
+    
+    /// 尺寸
+    public var size: CGSize {
+        set {
+            var frame = self.frame
+            frame.size = newValue
+            self.frame = frame
+        }
+        get {
+            return self.frame.size
+        }
+    }
+    
     /// 视图所在的控制器
     public var viewController: UIViewController? {
         weak var parent: UIResponder? = self
@@ -22,6 +138,13 @@ extension UIView {
         return nil
     }
     
+    /// 移除所有子视图
+    public func removeAllSubviews() {
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
     /// 视图生成图片(截屏效果)
     public func takeScreenshot() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, UIScreen.main.scale)
@@ -32,9 +155,9 @@ extension UIView {
     }
     
     /// 设置圆角
-    public func setCorner(_ cornerRadius: CGFloat) {
+    public func setCorner(_ cornerRadius: CGFloat, isClipped: Bool = false) {
         self.layer.cornerRadius = cornerRadius
-        self.layer.masksToBounds = true
+        self.layer.masksToBounds = isClipped
     }
     
     /// 设置边框颜色及边框宽度
@@ -50,6 +173,16 @@ extension UIView {
         maskLayer.frame = self.bounds
         maskLayer.path = maskPath.cgPath
         self.layer.mask = maskLayer
+    }
+    
+    /// 设置阴影
+    public func setShadow(color: UIColor, offset: CGSize, radius: CGFloat) {
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOffset = offset
+        self.layer.shadowRadius = radius
+        self.layer.shadowOpacity = 1
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
     }
     
     /// 设置虚线
@@ -114,5 +247,13 @@ extension UIView {
         gradientLayer.startPoint = CGPoint(x: 0, y: 1)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         self.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    /// 移除渐变
+    public func removeGradientColor() {
+        guard let sublayers = self.layer.sublayers, sublayers.count > 0 else {
+            return
+        }
+        sublayers.first?.removeFromSuperlayer()
     }
 }

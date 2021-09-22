@@ -41,6 +41,11 @@ extension CGFloat {
     }
     
     /// 随机浮点数(min~max)
+    static public func random(min: CGFloat, max: CGFloat) -> CGFloat {
+        return CGFloat.random() * (max - min) + min
+    }
+    
+    /// 随机浮点数(min~max)
     public static func random(_ within: Range<CGFloat>) -> CGFloat {
         return CGFloat.random() * (within.upperBound - within.lowerBound) + within.lowerBound
     }
