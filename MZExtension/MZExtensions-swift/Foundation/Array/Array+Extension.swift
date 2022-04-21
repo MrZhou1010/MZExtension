@@ -24,7 +24,7 @@ extension Array {
     }
     
     /// 数组转json字符串
-    public func jsonStringEncoded() -> String {
+    public func toJson() -> String {
         if JSONSerialization.isValidJSONObject(self) {
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
@@ -35,5 +35,10 @@ extension Array {
             }
         }
         return "error_valid_fail"
+    }
+    
+    /// return a object located at a random index
+    public func random() -> Any? {
+        return self.count > 0 ? self[Int(arc4random_uniform(UInt32(self.count)))] : nil
     }
 }

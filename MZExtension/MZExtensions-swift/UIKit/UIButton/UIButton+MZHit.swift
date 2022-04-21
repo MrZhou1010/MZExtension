@@ -6,7 +6,6 @@
 //  Copyright © 2020 Mr.Z. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension UIButton {
@@ -33,8 +32,8 @@ extension UIButton {
         if self.mz_clickEdgeInsets != nil {
             let x: CGFloat = -(self.mz_clickEdgeInsets?.left ?? 0)
             let y: CGFloat = -(self.mz_clickEdgeInsets?.top ?? 0)
-            let width: CGFloat = bounds.width + (self.mz_clickEdgeInsets?.left ?? 0) + (mz_clickEdgeInsets?.right ?? 0)
-            let height: CGFloat = bounds.height + (self.mz_clickEdgeInsets?.top ?? 0) + (mz_clickEdgeInsets?.bottom ?? 0)
+            let width: CGFloat = bounds.width + (self.mz_clickEdgeInsets?.left ?? 0) + (self.mz_clickEdgeInsets?.right ?? 0)
+            let height: CGFloat = bounds.height + (self.mz_clickEdgeInsets?.top ?? 0) + (self.mz_clickEdgeInsets?.bottom ?? 0)
             bounds = CGRect(x: x, y: y, width: width, height: height)
         }
         return bounds.contains(point)

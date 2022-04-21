@@ -1,12 +1,11 @@
 //
 //  UIImageView+MZGif.swift
-//  MZAd
+//  MZExtension
 //
 //  Created by Mr.Z on 2019/11/7.
 //  Copyright © 2019 Mr.Z. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension UIImageView {

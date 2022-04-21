@@ -155,9 +155,9 @@ extension UIView {
     }
     
     /// 设置圆角
-    public func setCorner(_ cornerRadius: CGFloat, isClipped: Bool = false) {
-        self.layer.cornerRadius = cornerRadius
-        self.layer.masksToBounds = isClipped
+    public func setCorner(_ radius: CGFloat = 10.0, isClipped: Bool = false) {
+        self.layer.cornerRadius = radius
+        self.clipsToBounds = isClipped
     }
     
     /// 设置边框颜色及边框宽度
@@ -180,7 +180,7 @@ extension UIView {
         self.layer.shadowColor = color.cgColor
         self.layer.shadowOffset = offset
         self.layer.shadowRadius = radius
-        self.layer.shadowOpacity = 1
+        self.layer.shadowOpacity = 1.0
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
     }
@@ -207,27 +207,24 @@ extension UIView {
         let borderLayer = CAShapeLayer()
         borderLayer.strokeColor = strokeColor.cgColor
         borderLayer.fillColor = UIColor.clear.cgColor
-        borderLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height), byRoundingCorners: UIRectCorner.allCorners, cornerRadii: CGSize(width: 5, height: 5)).cgPath
+        borderLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height), byRoundingCorners: UIRectCorner.allCorners, cornerRadii: CGSize(width: 5.0, height: 5.0)).cgPath
         borderLayer.frame = frame
         borderLayer.lineWidth = lineWidth
         borderLayer.lineCap = CAShapeLayerLineCap.square
         borderLayer.lineDashPattern = lineDashPattern
-        borderLayer.cornerRadius = 5
+        borderLayer.cornerRadius = 5.0
         self.layer.addSublayer(borderLayer)
     }
     
     /// 设置渐变颜色
     public func setGradientColor(_ colors: [CGColor], startPoint: CGPoint, endPoint: CGPoint) {
-        if self.layer.sublayers != nil && self.layer.sublayers!.count > 0 {
-            self.layer.sublayers!.first?.removeFromSuperlayer()
-        }
+        self.removeGradientColor()
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
         // 设置渐变的主颜色(可多个颜色添加)
         gradientLayer.colors = colors
-        // startPoint与endPoint分别为渐变的起始方向与结束方向,它是以矩形的四个角为基础的
-        // (0,0)为左上角 (1,0)为右上角 (0,1)为左下角 (1,1)为右下角
-        // 默认是值是(0.5,0)和(0.5,1)
+        // startPoint与endPoint分别为渐变的起始方向与结束方向, 它是以矩形的四个角为基础的,默认是值是(0.5,0)和(0.5,1)
+        // (0,0)为左上角、(1,0)为右上角、(0,1)为左下角、(1,1)为右下角
         gradientLayer.startPoint = startPoint
         gradientLayer.endPoint = endPoint
         // 将gradientLayer作为子layer添加到主layer上
@@ -236,9 +233,7 @@ extension UIView {
     
     /// 设置渐变颜色
     public func setGradientColor(_ colors: [CGColor], corner: CGFloat) {
-        if self.layer.sublayers != nil && self.layer.sublayers!.count > 0 {
-            self.layer.sublayers!.first?.removeFromSuperlayer()
-        }
+        self.removeGradientColor()
         let gradientLayer = CAGradientLayer()
         gradientLayer.cornerRadius = corner
         gradientLayer.frame = self.bounds

@@ -11,7 +11,7 @@ import Foundation
 extension Dictionary {
     
     /// 字典转json字符串
-    public func jsonStringEncoded() -> String {
+    public func toJson() -> String {
         if JSONSerialization.isValidJSONObject(self) {
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)

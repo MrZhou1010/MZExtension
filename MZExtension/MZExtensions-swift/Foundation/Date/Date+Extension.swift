@@ -124,7 +124,7 @@ extension Date {
     
     /// 计算星座
     public func calculateConstellation() -> String {
-        guard let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian) else {
+        guard let calendar = NSCalendar(identifier: .gregorian) else {
             return ""
         }
         let components = calendar.components([.month, .day], from: self)

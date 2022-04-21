@@ -16,8 +16,8 @@ extension Data {
     }
     
     /// json字符串转字典或者数组
-    public func jsonStringDecoded() -> Any? {
-        let object = try? JSONSerialization.jsonObject(with: self, options: .fragmentsAllowed)
+    public func jsonValueDecoded() -> Any? {
+        let object = try? JSONSerialization.jsonObject(with: self, options: .allowFragments)
         return object
     }
 }

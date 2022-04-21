@@ -19,14 +19,13 @@ extension UIDevice {
         return model
     }
     
-    public class var systemVersion: String {
+    static public var systemVersion: String {
         let os = ProcessInfo().operatingSystemVersion
         return String(os.majorVersion) + "." + String(os.minorVersion) + "." + String(os.patchVersion)
     }
     
     public var isPad: Bool {
-        let isPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad
-        return isPad
+        return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad)
     }
     
     public var isSimulator: Bool {
@@ -63,7 +62,7 @@ extension UIDevice {
         return false
     }
     
-    public class var uuid: String {
+    static public var uuid: String {
         let uuid = CFUUIDCreate(nil)
         let string = CFUUIDCreateString(nil, uuid)
         return string! as String
@@ -90,7 +89,7 @@ extension UIDevice {
     
     fileprivate func ipAddress(with ifaName: String) -> String? {
         var address: String?
-        // get list of all interfaces on the local machine
+        // get list of all interfaces on the local machine:
         var ifaddr: UnsafeMutablePointer<ifaddrs>?
         guard getifaddrs(&ifaddr) == 0 else {
             return nil
@@ -101,13 +100,13 @@ extension UIDevice {
         // for each interface ...
         for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
             let interface = ifptr.pointee
-            // check for IPv4 or IPv6 interface
+            // check for IPv4 or IPv6 interface:
             let addrFamily = interface.ifa_addr.pointee.sa_family
             if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
-                // check interface name
+                // check interface name:
                 let name = String(cString: interface.ifa_name)
-                if name == ifaName {
-                    // convert interface address to a human readable string
+                if  name == ifaName {
+                    // convert interface address to a human readable string:
                     var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
                     getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len), &hostname, socklen_t(hostname.count), nil, socklen_t(0), NI_NUMERICHOST)
                     address = String(cString: hostname)

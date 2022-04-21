@@ -41,6 +41,11 @@ extension String {
         return self.data(using: .utf8)?.base64EncodedString() ?? ""
     }
     
+    /// range of all string
+    public var range: NSRange {
+        return NSRange(location: 0, length: self.count)
+    }
+    
     /// 多语言
     public var localized: String {
         return NSLocalizedString(self, comment: self)
@@ -137,13 +142,25 @@ extension String {
         return String(format: hash as String).uppercased()
     }
     
+    /// md5加密
+    public func md5String() -> String {
+        let result = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(CC_MD5_DIGEST_LENGTH))
+        CC_MD5(Array(self.utf8), CC_LONG(self.count), result)
+        let str = String(format: "%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+                         result[0], result[1], result[2], result[3],
+                         result[4], result[5], result[6], result[7],
+                         result[8], result[9], result[10], result[11],
+                         result[12], result[13], result[14], result[15])
+        return str
+    }
+    
     /// 字符串尺寸
     public func size(with font: UIFont, size: CGSize, lineBreakMode: NSLineBreakMode? = nil) -> CGSize {
-        var attr: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: font]
+        var attr: [NSAttributedString.Key: Any] = [.font: font]
         if lineBreakMode != .byWordWrapping {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineBreakMode = lineBreakMode ?? .byCharWrapping
-            attr[NSAttributedString.Key.paragraphStyle] = paragraphStyle
+            attr[.paragraphStyle] = paragraphStyle
         }
         let rect = (self as NSString).boundingRect(with: size, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: attr, context: nil)
         return rect.size
@@ -163,11 +180,18 @@ extension String {
     
     /// json字符串转字典或者数组
     public func jsonStringDecoded() -> Any? {
-        if let data = self.data(using: .utf8) {
-            let object = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-            return object
+        guard let data = self.data(using: .utf8), let object = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else {
+            return nil
         }
-        return nil
+        return object
+    }
+    
+    /// json字符串转字典
+    public func toDict() -> [String: Any]? {
+        guard let data = self.data(using: .utf8), let dict = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else {
+            return nil
+        }
+        return dict
     }
     
     /// return a formatter date from string
@@ -176,6 +200,34 @@ extension String {
         formatter.dateFormat = format
         formatter.locale = Locale.current
         return formatter.date(from: self) ?? Date()
+    }
+    
+    public func indexOf(_ target: Character) -> Int? {
+        #if swift(>=5.0)
+        return self.firstIndex(of: target)?.utf16Offset(in: self)
+        #else
+        return self.firstIndex(of: target)?.encodedOffset
+        #endif
+    }
+    
+    public func subString(to: Int) -> String {
+        #if swift(>=5.0)
+        let endIndex = String.Index(utf16Offset: to, in: self)
+        #else
+        let endIndex = String.Index.init(encodedOffset: to)
+        #endif
+        let subStr = self[self.startIndex..<endIndex]
+        return String(subStr)
+    }
+    
+    public func subString(from: Int) -> String {
+        #if swift(>=5.0)
+        let startIndex = String.Index(utf16Offset: from, in: self)
+        #else
+        let startIndex = String.Index.init(encodedOffset: from)
+        #endif
+        let subStr = self[startIndex..<self.endIndex]
+        return String(subStr)
     }
 }
 

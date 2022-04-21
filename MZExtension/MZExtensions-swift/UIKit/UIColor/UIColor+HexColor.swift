@@ -10,17 +10,17 @@ import UIKit
 
 extension UIColor {
     
-    /// init method with RGB values from 0 to 255, instead of 0 to 1. with alpha(default:1.0)
+    /// init method with RGB values from 0 to 255, instead of 0 to 1. with alpha(default: 1.0)
     public convenience init(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat = 1.0) {
         self.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
     }
     
-    /// init method from gray value and alpha(default:1.0)
+    /// init method from gray value and alpha(default: 1.0)
     public convenience init(gray: CGFloat, alpha: CGFloat = 1.0) {
         self.init(r: gray, g: gray, b: gray, a: alpha)
     }
     
-    /// init method with hex string and alpha(default:1.0)
+    /// init method with hex string and alpha(default: 1.0)
     public convenience init(hexString: String, alpha: CGFloat = 1.0) {
         var formatted: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         formatted = formatted.replacingOccurrences(of: "0x", with: "")
@@ -46,8 +46,8 @@ extension UIColor {
         }
     }
     
-    /// return random UIColor with random alpha(default:false)
-    public static func random(randomAlpha: Bool = false) -> UIColor {
+    /// return random UIColor with random alpha(default: false)
+    static public func random(randomAlpha: Bool = false) -> UIColor {
         let randomRed = CGFloat.random()
         let randomGreen = CGFloat.random()
         let randomBlue = CGFloat.random()
@@ -55,18 +55,18 @@ extension UIColor {
         return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: alpha)
     }
     
-    /// return RGB values from 0 to 255, instead of 0 to 1. and alpha(default:1.0)
-    public static func color(r: CGFloat, g: CGFloat, b: CGFloat, alpha: CGFloat = 1.0) -> UIColor {
+    /// return RGB values from 0 to 255, instead of 0 to 1. and alpha(default: 1.0)
+    static public func color(r: CGFloat, g: CGFloat, b: CGFloat, alpha: CGFloat = 1.0) -> UIColor {
         return UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: alpha)
     }
     
-    /// return color from hex string and alpha(default:1.0)
-    public static func color(hex: String, alpha: CGFloat = 1.0) -> UIColor {
+    /// return color from hex string and alpha(default: 1.0)
+    static public func color(hex: String, alpha: CGFloat = 1.0) -> UIColor {
         if hex.isEmpty {
             return UIColor.clear
         }
         // 去掉特殊字符及大写
-        var hHex = hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines).uppercased()
+        var hHex = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         if hHex.count < 6 {
             return UIColor.clear
         }
@@ -115,6 +115,6 @@ extension UIColor {
         var a: CGFloat = 0.0
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
         let rgb: Int = (Int)(r * 255) << 16 | (Int)(g * 255) << 8 | (Int)(b * 255) << 0
-        return String(format:"#%06x", rgb)
+        return String(format: "#%06x", rgb)
     }
 }

@@ -112,7 +112,7 @@ extension UIApplication {
         return Float(info.resident_size) / (1024 * 1024)
     }
     
-    /// YY原方法不是很准确,计算出来的CPU占用率会维持一个值基本没有变化.代码中的_prevCPUInfo和_numPrevCPUInfo 等使用的是局部变量,这会造成对_prevCPUInfo非空的判断总是为假,最终计算_cpuInfo和_prevCPUInfo差值的那段代码根本不会执行.修改如下
+    /// YY原方法不是很准确,计算出来的CPU占用率会维持一个值基本没有变化, 代码中的_prevCPUInfo和_numPrevCPUInfo 等使用的是局部变量, 这会造成对_prevCPUInfo非空的判断总是为假, 最终计算_cpuInfo和_prevCPUInfo差值的那段代码根本不会执行
     public var cpuUsage: Float {
         let HOST_CPU_LOAD_INFO_COUNT = MemoryLayout<host_cpu_load_info>.stride/MemoryLayout<integer_t>.stride
         var size = mach_msg_type_number_t(HOST_CPU_LOAD_INFO_COUNT)

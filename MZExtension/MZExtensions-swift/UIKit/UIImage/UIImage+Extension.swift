@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Accelerate
 
 extension UIImage {
     
@@ -154,7 +155,7 @@ extension UIImage {
     }
     
     /// 返回空白的图片
-    public class func blankImage(width: CGFloat = 1.0, height: CGFloat = 1.0) -> UIImage? {
+    static public func blankImage(width: CGFloat = 1.0, height: CGFloat = 1.0) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height), false, 0.0)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -162,12 +163,12 @@ extension UIImage {
     }
     
     /// 根据颜色生成图片
-    public class func image(with color: UIColor) -> UIImage? {
+    static public func image(with color: UIColor) -> UIImage? {
         return self.image(with: color, size: CGSize(width: 1.0, height: 1.0))
     }
     
     /// 根据颜色生成图片
-    public class func image(with color: UIColor, size: CGSize) -> UIImage? {
+    static public func image(with color: UIColor, size: CGSize) -> UIImage? {
         if size.width <= 0 || size.height <= 0 {
             return nil
         }
@@ -215,14 +216,174 @@ extension UIImage {
         }
     }
     
+    public func rotateLeft90() -> UIImage? {
+        return self.image(byRotate: self.degressToRadians(degress: 90.0), fitSize: true)
+    }
+    
+    public func rotateRight90() -> UIImage? {
+        return self.image(byRotate: self.degressToRadians(degress: -90.0), fitSize: true)
+    }
+    
+    public func rotate180() -> UIImage? {
+        return self.flip(horizontal: true, vertical: true)
+    }
+    
+    public func flipVerical() -> UIImage? {
+        return self.flip(horizontal: false, vertical: true)
+    }
+    
+    public func flipHorizontal() -> UIImage? {
+        return self.flip(horizontal: true, vertical: false)
+    }
+    
+    fileprivate func degressToRadians(degress: CGFloat) -> CGFloat {
+        return degress * CGFloat.pi / 180.0
+    }
+    
+    fileprivate func flip(horizontal: Bool, vertical: Bool) -> UIImage? {
+        if self.cgImage == nil {
+            return nil
+        }
+        let width = self.cgImage?.width ?? 0
+        let height = self.cgImage?.height ?? 0
+        let bytesPerRow = width * 4
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        guard let context = CGContext(data: nil,
+                                      width: width,
+                                      height: height,
+                                      bitsPerComponent: 8,
+                                      bytesPerRow: bytesPerRow,
+                                      space: colorSpace,
+                                      bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue) else {
+            return nil
+        }
+        context.draw(self.cgImage!, in: CGRect(x: 0, y: 0, width: width, height: height))
+        guard let data = context.data else {
+            return nil
+        }
+        var src = vImage_Buffer(data: data, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
+        var dest = vImage_Buffer(data: data, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
+        if horizontal {
+            vImageVerticalReflect_ARGB8888(&src, &dest, vImage_Flags(kvImageBackgroundColorFill))
+        }
+        if vertical {
+            vImageHorizontalReflect_ARGB8888(&src, &dest, vImage_Flags(kvImageBackgroundColorFill))
+        }
+        if let imgRef = context.makeImage() {
+            let img = UIImage(cgImage: imgRef, scale: self.scale, orientation: self.imageOrientation)
+            return img
+        }
+        return nil
+    }
+    
+    public func image(byRotate radians: CGFloat, fitSize: Bool) -> UIImage? {
+        if self.cgImage == nil {
+            return nil
+        }
+        let width = self.cgImage?.width ?? 0
+        let height = self.cgImage?.height ?? 0
+        let rect = CGRect(x: 0, y: 0, width: width, height: height).applying(fitSize ? CGAffineTransform(rotationAngle: radians) : CGAffineTransform.identity)
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        guard let context = CGContext(data: nil,
+                                      width: Int(rect.size.width),
+                                      height: Int(rect.size.height),
+                                      bitsPerComponent: 8,
+                                      bytesPerRow: Int(rect.size.width) * 4,
+                                      space: colorSpace,
+                                      bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue) else {
+            return nil
+        }
+        context.setShouldAntialias(true)
+        context.setAllowsAntialiasing(true)
+        context.interpolationQuality = CGInterpolationQuality.high
+        context.translateBy(x: +(rect.size.width * 0.5), y: +(rect.size.height * 0.5))
+        context.rotate(by: radians)
+        context.draw(self.cgImage!, in: CGRect(x: -(Double(width) * 0.5), y: -(Double(height) * 0.5), width: Double(width), height: Double(height)))
+        if let imgRef = context.makeImage() {
+            let img = UIImage(cgImage: imgRef, scale: self.scale, orientation: self.imageOrientation)
+            return img
+        }
+        return nil
+    }
+    
+    /// fix image orientaton to protrait up
+    public func fixedOrientation() -> UIImage? {
+        guard imageOrientation != UIImage.Orientation.up else {
+            // this is default orientation, don't need to do anything
+            return self.copy() as? UIImage
+        }
+        guard let cgImage = self.cgImage else {
+            // CGImage is not available
+            return nil
+        }
+        guard let colorSpace = cgImage.colorSpace, let ctx = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: cgImage.bitsPerComponent, bytesPerRow: 0, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
+            // not able to create CGContext
+            return nil
+        }
+        var transform: CGAffineTransform = CGAffineTransform.identity
+        switch imageOrientation {
+        case .down, .downMirrored:
+            transform = transform.translatedBy(x: size.width, y: size.height)
+            transform = transform.rotated(by: CGFloat.pi)
+        case .left, .leftMirrored:
+            transform = transform.translatedBy(x: size.width, y: 0)
+            transform = transform.rotated(by: CGFloat.pi / 2.0)
+        case .right, .rightMirrored:
+            transform = transform.translatedBy(x: 0, y: size.height)
+            transform = transform.rotated(by: CGFloat.pi / -2.0)
+        case .up, .upMirrored:
+            break
+        @unknown default:
+            fatalError("Missing...")
+            break
+        }
+        // flip image one more time if needed to, this is to prevent flipped image
+        switch imageOrientation {
+        case .upMirrored, .downMirrored:
+            transform = transform.translatedBy(x: size.width, y: 0)
+            transform = transform.scaledBy(x: -1.0, y: 1.0)
+        case .leftMirrored, .rightMirrored:
+            transform = transform.translatedBy(x: size.height, y: 0)
+            transform = transform.scaledBy(x: -1.0, y: 1.0)
+        case .up, .down, .left, .right:
+            break
+        @unknown default:
+            fatalError("Missing...")
+            break
+        }
+        ctx.concatenate(transform)
+        switch imageOrientation {
+        case .left, .leftMirrored, .right, .rightMirrored:
+            ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: size.height, height: size.width))
+        default:
+            ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+            break
+        }
+        guard let newCGImage = ctx.makeImage() else {
+            return nil
+        }
+        return UIImage.init(cgImage: newCGImage, scale: 1.0, orientation: .up)
+    }
+    
+    /// 对图片进行模糊处理
+    public func blurryImage(blur: CGFloat) -> UIImage? {
+        let blurFilter = CIFilter(name: "CIGaussianBlur")
+        blurFilter?.setValue(CIImage(image: self), forKey: kCIInputImageKey)
+        blurFilter?.setValue(blur, forKey: "inputRadius")
+        guard let outputImage = blurFilter?.outputImage else {
+            return nil
+        }
+        return UIImage(ciImage: outputImage)
+    }
+    
     /// 获取图片某一个位置像素的颜色
     public func pixelColor(_ point: CGPoint) -> UIColor? {
         let size = self.cgImage.map { CGSize(width: $0.width, height: $0.height) } ?? self.size
         guard point.x >= 0, point.x < size.width, point.y >= 0, point.y < size.height,
               let data = self.cgImage?.dataProvider?.data,
               let pointer = CFDataGetBytePtr(data) else {
-            return nil
-        }
+                  return nil
+              }
         let numberOfComponents = 4
         let pixelData = Int((size.width * point.y) + point.x) * numberOfComponents
         let r = CGFloat(pointer[pixelData]) / 255.0
@@ -232,7 +393,7 @@ extension UIImage {
         return UIColor(red: r, green: g, blue: b, alpha: a)
     }
     
-    public class func gif(data: Data) -> UIImage? {
+    static public func gif(data: Data) -> UIImage? {
         // create source from data
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
             return nil
@@ -240,40 +401,40 @@ extension UIImage {
         return UIImage.animatedImage(source)
     }
     
-    public class func gif(url: String) -> UIImage? {
-        // validate URL
-        guard let bundleURL = URL(string: url) else {
+    static public func gif(url: String) -> UIImage? {
+        // validate url
+        guard let bundleUrl = URL(string: url) else {
             return nil
         }
         // validate data
-        guard let imageData = try? Data(contentsOf: bundleURL) else {
+        guard let imageData = try? Data(contentsOf: bundleUrl) else {
             return nil
         }
-        return gif(data: imageData)
+        return self.gif(data: imageData)
     }
     
-    public class func gif(name: String) -> UIImage? {
+    static public func gif(name: String) -> UIImage? {
         // check for existance of gif
-        guard let bundleURL = Bundle.main.url(forResource: name, withExtension: "gif") else {
+        guard let bundleUrl = Bundle.main.url(forResource: name, withExtension: "gif") else {
             return nil
         }
         // validate data
-        guard let imageData = try? Data(contentsOf: bundleURL) else {
+        guard let imageData = try? Data(contentsOf: bundleUrl) else {
             return nil
         }
-        return gif(data: imageData)
+        return self.gif(data: imageData)
     }
     
     @available(iOS 9.0, *)
-    public class func gif(asset: String) -> UIImage? {
+    static public func gif(asset: String) -> UIImage? {
         // create source from assets catalog
         guard let dataAsset = NSDataAsset(name: asset) else {
             return nil
         }
-        return gif(data: dataAsset.data)
+        return self.gif(data: dataAsset.data)
     }
     
-    internal class func animatedImage(_ source: CGImageSource) -> UIImage? {
+    class internal func animatedImage(_ source: CGImageSource) -> UIImage? {
         let count = CGImageSourceGetCount(source)
         var images = [CGImage]()
         var delays = [Int]()
@@ -297,22 +458,23 @@ extension UIImage {
             return sum
         }()
         // get frames
-        let gcd = gcdForArray(delays)
+        let gcd = UIImage.gcdForArray(delays)
         var frames = [UIImage]()
         var frame: UIImage
         var frameCount: Int
         for index in 0 ..< count {
             frame = UIImage(cgImage: images[Int(index)])
             frameCount = Int(delays[Int(index)] / gcd)
-            for _ in 0..<frameCount {
+            for _ in 0 ..< frameCount {
                 frames.append(frame)
             }
         }
+        // heyhey
         let animation = UIImage.animatedImage(with: frames, duration: Double(duration) / 1000.0)
         return animation
     }
     
-    internal class func gcdForArray(_ array: [Int]) -> Int {
+    class internal func gcdForArray(_ array: [Int]) -> Int {
         if array.isEmpty {
             return 1
         }
@@ -323,7 +485,7 @@ extension UIImage {
         return gcd
     }
     
-    internal class func gcdForPair(_ lhs: Int?, _ rhs: Int?) -> Int {
+    class internal func gcdForPair(_ lhs: Int?, _ rhs: Int?) -> Int {
         var lhs = lhs
         var rhs = rhs
         // check if one of them is nil
@@ -356,7 +518,7 @@ extension UIImage {
         }
     }
     
-    internal class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
+    class internal func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
         // get dictionaries
         let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
@@ -387,7 +549,7 @@ extension UIImage {
     }
     
     /// 将内容生成二维码
-    public static func generateCode(message: String, logo: UIImage? = nil) -> UIImage {
+    static public func generateCode(message: String, logo: UIImage? = nil) -> UIImage {
         // 创建滤镜
         let filter = CIFilter(name: "CIQRCodeGenerator")
         // 恢复默认设置
@@ -407,7 +569,7 @@ extension UIImage {
     }
     
     /// 获取高清图片
-    fileprivate static func getHDImage(_ outImage: CIImage) -> UIImage {
+    static fileprivate func getHDImage(_ outImage: CIImage) -> UIImage {
         let transform = CGAffineTransform(scaleX: 10, y: 10)
         // 放大图片
         let ciImage = outImage.transformed(by: transform)
@@ -415,7 +577,7 @@ extension UIImage {
     }
     
     /// 获取带前景logo的图片
-    fileprivate static func getResultImage(hdImage: UIImage, logo: UIImage) -> UIImage {
+    static fileprivate func getResultImage(hdImage: UIImage, logo: UIImage) -> UIImage {
         let hdSize = hdImage.size
         // 开启图形上下文
         UIGraphicsBeginImageContext(hdSize)

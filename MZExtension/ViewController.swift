@@ -16,16 +16,16 @@ class ViewController: UIViewController {
     }
     
     private func setupUI() {
-        let view = UIView(frame: CGRect(x: 100, y: 200, width: 100, height: 200))
+        let view = UIView(frame: CGRect(x: 100.0, y: 200.0, width: 100.0, height: 200.0))
         view.backgroundColor = UIColor.red
         self.view.addSubview(view)
         
         let btn = UIButton(type: .custom)
-        btn.frame = CGRect(x: 80, y: 80, width: 40, height: 40)
+        btn.frame = CGRect(x: 80.0, y: 80.0, width: 40.0, height: 40.0)
         btn.backgroundColor = UIColor.blue
         btn.addTarget(self, action: #selector(btnClicked(btn:)), for: .touchUpInside)
         // 扩充按钮的点击区域
-        btn.mz_clickEdgeInsets = UIEdgeInsets(top: 80, left: 80, bottom: 80, right: 80)
+        btn.mz_clickEdgeInsets = UIEdgeInsets(top: 80.0, left: 80.0, bottom: 80.0, right: 80.0)
         view.addSubview(btn)
     }
     

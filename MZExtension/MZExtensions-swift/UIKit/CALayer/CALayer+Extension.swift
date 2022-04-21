@@ -130,6 +130,17 @@ extension CALayer {
         }
     }
     
+    /// 旋转转换
+    public var transformRotation: CGFloat {
+        set {
+            self.setValue(newValue, forKeyPath: "transform.rotation")
+        }
+        get {
+            let value = self.value(forKeyPath: "transform.rotation")
+            return value as! CGFloat
+        }
+    }
+    
     /// 移除所有子layer
     public func removeAllSublayers() {
         guard let sublayers = self.sublayers else {
@@ -160,7 +171,7 @@ extension CALayer {
     
     /// 添加fade动画
     public func addFadeAnimation(with duration: TimeInterval, curve: UIView.AnimationCurve) {
-        guard duration > 0 else {
+        if duration <= 0 {
             return
         }
         var mediaFunction: CAMediaTimingFunctionName = .default
@@ -189,7 +200,7 @@ extension CALayer {
     }
     
     /// return a line layer
-    public static func layer(with size: CGSize, color: UIColor) -> CALayer {
+    static public func layer(withLine size: CGSize, color: UIColor = UIColor.gray) -> CALayer {
         let layer = CALayer()
         layer.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         layer.backgroundColor = color.cgColor
@@ -197,10 +208,13 @@ extension CALayer {
     }
     
     /// return a image layer
-    public static func layer(with image: UIImage) -> CALayer {
+    static public func layer(withImage image: UIImage?) -> CALayer {
+        guard let image = image else {
+            return CALayer()
+        }
         let layer = CALayer()
-        layer.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
         layer.contents = image.cgImage
+        layer.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
         return layer
     }
 }
@@ -208,7 +222,7 @@ extension CALayer {
 extension CATextLayer {
     
     /// retuan a text layer
-    public static func layer(with text: String, mode: CATextLayerAlignmentMode, font: UIFont) -> CATextLayer {
+    static public func layer(withText text: String, mode: CATextLayerAlignmentMode, font: UIFont) -> CATextLayer {
         let layer = CATextLayer()
         layer.string = text
         layer.alignmentMode = mode
